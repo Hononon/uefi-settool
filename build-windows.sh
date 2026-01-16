@@ -33,4 +33,4 @@ $CMAKE_CMD .. -DCMAKE_BUILD_TYPE=Release
 make -j$(nproc)
 
 echo "=== Build complete ==="
-echo "Binary: $BUILD_DIR/uefi-settool.exe"
+echo "Binary: $BUILD_DIR/uefiSetTool.exe"
