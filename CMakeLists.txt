@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(uefi-settool VERSION 1.0.0 LANGUAGES CXX)
+project(uefiSetTool VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -28,7 +28,11 @@ elseif(UNIX AND NOT APPLE)
     list(APPEND SOURCES src/linuxbootmanager.cpp)
 endif()
 
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+if(WIN32)
+    add_executable(${PROJECT_NAME} WIN32 ${SOURCES} ${HEADERS})
+else()
+    add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+endif()
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
@@ -39,5 +43,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 
 if(WIN32)
-    target_link_libraries(${PROJECT_NAME} PRIVATE advapi32)
+    target_link_libraries(${PROJECT_NAME} PRIVATE advapi32 shell32)
 endif()
